@@ -1,7 +1,11 @@
+import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
+import auth from '../../Firebase/Firebase.init';
 
 const Navbar = () => {
+    const [user, loading, error] = useAuthState(auth);
     const [hamburger, setHamburger] = useState(false);
     return (
 
@@ -31,12 +35,25 @@ const Navbar = () => {
                             <Link to="/" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Pricing</Link>
                         </li>
                         <li>
-                            <NavLink
-                                to="/login"
-                                className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
-                            >
-                                Login
-                            </NavLink>
+                            {
+                                user
+                                    ?
+                                    <NavLink
+                                        to="/login"
+                                        onClick={() => signOut(auth)}
+                                        className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                                    >
+                                        Logout
+                                    </NavLink>
+                                    :
+                                    <NavLink
+                                        to="/login"
+                                        className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                                    >
+                                        Login
+                                    </NavLink>
+                            }
+
                         </li>
                     </ul>
                 </div>

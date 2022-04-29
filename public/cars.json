@@ -1,0 +1,56 @@
+[
+    {
+        "_id": 1,
+        "name": "parado",
+        "img": "https://i.ibb.co/J5JRgrT/car1.jpg",
+        "description": "helo this is a prado car and a fassionable now chosse",
+        "price": "2000",
+        "quantity": 12,
+        "supplier": "Sagor"
+    },
+    {
+        "_id": 2,
+        "name": "parado 1",
+        "img": "https://i.ibb.co/J5JRgrT/car1.jpg",
+        "description": "helo this is a prado car and a fassionable now chosse",
+        "price": "2500",
+        "quantity": 20,
+        "supplier": "Sagor"
+    },
+    {
+        "_id": 3,
+        "name": "parado 2",
+        "img": "https://i.ibb.co/J5JRgrT/car1.jpg",
+        "description": "helo this is a prado car and a fassionable now chosse",
+        "price": "1900",
+        "quantity": 18,
+        "supplier": "Sagor"
+    },
+    {
+        "_id": 4,
+        "name": "parado 3",
+        "img": "https://i.ibb.co/J5JRgrT/car1.jpg",
+        "description": "helo this is a prado car and a fassionable now chosse",
+        "price": "2000",
+        "quantity": 11,
+        "supplier": "Sagor"
+    },
+    {
+        "_id": 5,
+        "name": "parado 4",
+        "img": "https://i.ibb.co/J5JRgrT/car1.jpg",
+        "description": "helo this is a prado car and a fassionable now chosse",
+        "price": "29000",
+        "quantity": 16,
+        "supplier": "Sagor"
+    },
+    {
+        "_id": 6,
+        "name": "parado 5",
+        "img": "https://i.ibb.co/J5JRgrT/car1.jpg",
+        "description": "helo this is a prado car and a fassionable now chosse",
+        "price": "2300",
+        "quantity": 15,
+        "supplier": "Sagor"
+    }
+]

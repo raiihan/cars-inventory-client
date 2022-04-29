@@ -1,9 +1,14 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation } from 'react-router-dom';
+import auth from '../../Firebase/Firebase.init';
 
 const RequireAuth = ({ children }) => {
-  const [user] = user;
+  const [user, loading, error] = useAuthState(auth);
   let location = useLocation();
+  if (loading) {
+    return <p>Loading...</p>
+  }
 
   if (user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
@@ -12,10 +17,3 @@ const RequireAuth = ({ children }) => {
 };
 
 export default RequireAuth;
-
-// let navigate = useNavigate();
-// let location = useLocation();
-
-// let from = location.state?.from?.pathname || "/";
-
-// navigate(from, { replace: true });
