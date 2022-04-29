@@ -23,7 +23,8 @@ const Inventories = () => {
                 }
             </div>
             {
-                products.slice(0, 1).map(p => <Banner
+                products.slice(2, 3).map(p => <Banner
+                    key={p._id}
                     product={p}
                 />)
             }
