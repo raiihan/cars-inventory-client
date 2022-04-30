@@ -1,23 +1,28 @@
 import React from 'react';
+import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import auth from '../../../Firebase/Firebase.init';
+import { toast } from 'react-toastify';
 
 const AddItems = () => {
     const [user] = useAuthState(auth)
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const onSubmit = async data => {
+    const onSubmit = async userInput => {
         const body = {
-            name: data.name,
+            name: userInput.name,
             email: user?.email,
-            description: data.description,
-            img: data.img,
-            price: data.price,
-            quantity: data.quantity,
-            supplier: data.supplier,
+            description: userInput.description,
+            img: userInput.img,
+            price: userInput.price,
+            quantity: userInput.quantity,
+            supplier: userInput.supplier,
         }
-        console.log(body);
-        // reset()
+        const { data } = await axios.post('http://localhost:5000/product', body)
+        if (data.insertedId) {
+            toast('Your post added Successfully')
+            reset()
+        }
     };
     return (
         <div className='container mx-auto'>
