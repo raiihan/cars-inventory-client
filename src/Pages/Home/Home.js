@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from './Banner/Banner';
 import Inventories from './Inventories/Inventories';
+import TotalCounter from './TotalCounter/TotalCounter';
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
             <div className='container mx-auto'>
 
                 <Inventories />
+                <TotalCounter />
             </div>
         </>
     );
