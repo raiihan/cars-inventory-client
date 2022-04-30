@@ -10,22 +10,15 @@ const Inventories = () => {
             .then(data => setProducts(data))
     }, [])
     return (
-        <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {
-                    products.map(product => <Inventory
-                        key={product._id}
-                        product={product}
-                    />)
-                }
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {
-                products.slice(2, 3).map(p => <Banner
-                    key={p._id}
-                    product={p}
+                products.slice(0, 6).map(product => <Inventory
+                    key={product._id}
+                    product={product}
                 />)
             }
         </div>
+
     );
 };
 
