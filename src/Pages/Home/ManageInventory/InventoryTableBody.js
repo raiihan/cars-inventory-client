@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
-const InventoryTableBody = ({ product }) => {
+const InventoryTableBody = ({ product, handleDeleteItem }) => {
     const { _id, name, img, price, quantity, supplier, description } = product;
     return (
         <tr class="border-b">
@@ -19,7 +19,10 @@ const InventoryTableBody = ({ product }) => {
                 ${price}
             </td>
             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap cursor-pointer">
-                <FaRegTrashAlt size={35} color={'red'} />
+                <FaRegTrashAlt
+                    onClick={() => handleDeleteItem(_id)}
+                    size={35}
+                    color={'red'} />
             </td>
         </tr>
     );

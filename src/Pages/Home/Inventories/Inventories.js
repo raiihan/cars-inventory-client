@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Banner from '../Banner/Banner';
 import Inventory from '../Inventory/Inventory';
 
 const Inventories = () => {
