@@ -1,7 +1,11 @@
 import React from 'react';
 import Banner from './Banner/Banner';
 import Inventories from './Inventories/Inventories';
+import SupplierCollection from './SupplierCollection/SupplierCollection';
 import TotalCounter from './TotalCounter/TotalCounter';
+
+
+
 
 const Home = () => {
     return (
@@ -12,6 +16,7 @@ const Home = () => {
 
                 <Inventories />
                 <TotalCounter />
+                <SupplierCollection />
             </div>
         </>
     );
