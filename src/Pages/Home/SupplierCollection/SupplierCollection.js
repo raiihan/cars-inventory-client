@@ -13,10 +13,13 @@ const SupplierCollection = () => {
     const handleSearchSupplierProduct = e => {
         e.preventDefault();
         const supplier = e.target.supplier.value;
-        const url = `http://localhost:5000/productBySupplier?supplier=${supplier}`
+        const url = `https://hidden-retreat-56283.herokuapp.com/productBySupplier?supplier=${supplier}`
         fetch(url)
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => {
+
+                setProducts(data)
+            })
     }
     return (
 
@@ -25,11 +28,11 @@ const SupplierCollection = () => {
                 <h2 className='text-center text-4xl text-blue-500 mb-3'>View all products of a supplier</h2>
 
                 <form onSubmit={handleSearchSupplierProduct}>
-                    <div class="sm:flex items-start justify-center mb-6">
+                    <div className="sm:flex items-start justify-center mb-6">
                         <div className='mr-3 mb-4 w-full sm:w-3/5'>
-                            <input type="text" name='supplier' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " required="" />
+                            <input type="text" name='supplier' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " required="" />
                         </div>
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Search</button>
                     </div>
                 </form>
 
@@ -41,11 +44,10 @@ const SupplierCollection = () => {
                 autoplay={true}
                 navigation={true}
                 scrollbar={{ draggable: true }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
             >
 
                 {
+
                     products.map(product => <SwiperSlide>
 
                         <div className='relative parent'>
@@ -58,6 +60,7 @@ const SupplierCollection = () => {
                         </div>
 
                     </SwiperSlide>)
+
                 }
             </Swiper>
         </>

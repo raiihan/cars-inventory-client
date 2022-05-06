@@ -31,7 +31,7 @@ const Banner = () => {
                 <SwiperSlide >
                     <div className='relative'>
                         <img src={slide2} alt="" />
-                        <div className='absolute hidden sm:block top-[400px] left-[850px]  text-4xl uppercase text-gray-600 font-medium'><p>2016 new</p>
+                        <div className='absolute hidden sm:block top-[390px] left-[850px]  text-4xl uppercase text-gray-600 font-medium'><p>2016 new</p>
                             <p>Mercedes-benz c-class</p>
                         </div>
                     </div>

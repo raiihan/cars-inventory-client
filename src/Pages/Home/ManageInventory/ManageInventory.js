@@ -1,22 +1,52 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import useProducts from '../../../hooks/useProducts';
+import Loading from '../../Shared/Loading';
 import InventoryTableBody from './InventoryTableBody';
 import ResponsiveTabaleData from './ResponsiveTabaleData';
 
 const ManageInventory = () => {
-    const [products] = useProducts()
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const [pages, setPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+    useEffect(() => {
+        const getProductQuantity = async () => {
+            const { data } = await axios.get('https://hidden-retreat-56283.herokuapp.com/productCount')
+            const count = data.count
+            const page = Math.ceil(count / 5)
+            setPages(page)
+        }
+        getProductQuantity();
+    }, [])
+    useEffect(() => {
+        const getProduct = async () => {
+            const url = `https://hidden-retreat-56283.herokuapp.com/products?currentPage=${currentPage}`;
+            const { data } = await axios.get(url);
+            setProducts(data)
+            setLoading(true)
+        }
+        getProduct()
+    }, [currentPage, products])
 
     const handleDeleteItem = async id => {
-        const { data } = await axios.delete(`http://localhost:5000/product/${id}`)
-        if (data.deletedCount === 1) {
-            toast("Deleted Successfully");
+        const proceed = window.confirm("Are You Sure Want To Delete?");
+        if (proceed) {
+            const { data } = await axios.delete(`https://hidden-retreat-56283.herokuapp.com/product/${id}`)
+            if (data.deletedCount === 1) {
+                toast("Deleted Successfully");
+            }
         }
     }
     return (
 
-        <>
+        <div className='container mx-auto'>
+            <div>
+                <h1 className='text-3xl text-center my-8'>If you want to add new Item <button className='text-blue-500 underline'><Link to="/additems">Please Click Here</Link></button></h1>
+
+            </div>
             <div className='container mx-auto'>
                 <div className="sm:flex flex-col hidden ">
                     <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -45,11 +75,15 @@ const ManageInventory = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            products.map(product => <InventoryTableBody
-                                                key={product._id}
-                                                product={product}
-                                                handleDeleteItem={handleDeleteItem}
-                                            />)
+                                            loading
+                                                ?
+                                                products.map(product => <InventoryTableBody
+                                                    key={product._id}
+                                                    product={product}
+                                                    handleDeleteItem={handleDeleteItem}
+                                                />)
+                                                :
+                                                <Loading />
                                         }
                                     </tbody>
                                 </table>
@@ -67,8 +101,15 @@ const ManageInventory = () => {
                     }
                 </div>
             </div>
-        </>
-
+            <div className='my-5'>
+                {
+                    [...Array(pages).keys()].map((number, index) => <button
+                        onClick={() => setCurrentPage(number)}
+                        className={`${currentPage === number ? "bg-blue-400 text-white " : "text-gray-500 bg-white border "}"py-2 mx-2 px-3 leading-tight border-gray-300 hover:bg-blue-400 hover:text-white "`}
+                        key={index}>{number + 1}</button>)
+                }
+            </div>
+        </div>
     );
 };
 

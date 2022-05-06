@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaUnlockAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
-import auth from '../../Firebase/Firebase.init';
+import auth from "../../Firebase.init";
+// import auth from "../../Firebase.init";
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import SocialLogin from './SocialLogin';
 import { toast } from 'react-toastify';
+import Loading from "../Shared/Loading";
 
 const Login = () => {
     const [eyes, setEyes] = useState(false);
@@ -27,11 +30,17 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
     useEffect(() => {
         if (user) {
-            navigate(from, { replace: true });
+            const email = user?.user?.email
+            const genetateToken = async () => {
+                const { data } = await axios.post('https://hidden-retreat-56283.herokuapp.com/createJWT', { email })
+                localStorage.setItem('accessToken', data.accessToken)
+                navigate(from, { replace: true });
+            }
+            genetateToken();
         }
     }, [user])
     if (loading || sending) {
-        return <p>Loding...</p>
+        return <Loading />
     }
     const onSubmit = data => {
         const email = data.email;
@@ -96,7 +105,7 @@ const Login = () => {
 
                     {error && <p className="mb-2 text-sm text-red-600"><span className="font-medium">Oops!</span> {error.code}</p>}
                     <div className='w-1/2 mx-auto mb-6'>
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm w-full  px-5 py-2.5 text-center ">Submit</button>
+                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm w-full  px-5 py-2.5 text-center ">Login</button>
                     </div>
                 </form>
 

@@ -1,18 +1,46 @@
+import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../../Firebase/Firebase.init';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import auth from '../../../Firebase.init';
 import InventoryTableBody from '../ManageInventory/InventoryTableBody';
 import ResponsiveTabaleData from '../ManageInventory/ResponsiveTabaleData';
 
 const MyItems = () => {
+    const navigate = useNavigate();
     const [user] = useAuthState(auth)
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        const email = user?.email;
-        fetch(`http://localhost:5000/products?email=${email}`)
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [user, products])
+        const getOrder = async () => {
+            const email = user?.email;
+            const url = `https://hidden-retreat-56283.herokuapp.com/myorder?email=${email}`;
+            try {
+                const { data } = await axios.get(url, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                })
+                setProducts(data)
+            } catch (error) {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    signOut(auth)
+                    navigate('/login')
+                }
+            }
+        }
+        getOrder();
+    }, [user, products]);
+    const handleDeleteItem = async id => {
+        const proceed = window.confirm("Are You Sure Want To Delete?");
+        if (proceed) {
+            const { data } = await axios.delete(`https://hidden-retreat-56283.herokuapp.com/product/${id}`)
+            if (data.deletedCount === 1) {
+                toast("Deleted Successfully");
+            }
+        }
+    }
     return (
         <div className='container mx-auto'>
             <div className="sm:flex flex-col hidden ">
@@ -45,6 +73,7 @@ const MyItems = () => {
                                         products.map(product => <InventoryTableBody
                                             key={product._id}
                                             product={product}
+                                            handleDeleteItem={handleDeleteItem}
                                         />)
                                     }
                                 </tbody>
@@ -58,6 +87,7 @@ const MyItems = () => {
                     products.map(product => <ResponsiveTabaleData
                         key={product._id}
                         product={product}
+                        handleDeleteItem={handleDeleteItem}
                     />)
                 }
             </div>

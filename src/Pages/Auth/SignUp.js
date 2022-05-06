@@ -6,7 +6,8 @@ import { FaUnlockAlt, FaUser } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import SocialLogin from './SocialLogin';
-import auth from '../../Firebase/Firebase.init';
+import auth from "../../Firebase.init";
+import Loading from '../Shared/Loading';
 
 const SignUp = () => {
     const [eyes, setEyes] = useState(false);
@@ -29,8 +30,8 @@ const SignUp = () => {
         }
     }, [user])
 
-    if (loading) {
-        return <p>Loding...</p>
+    if (loading || updating) {
+        return <Loading />
     }
     const onSubmit = async data => {
         const name = data.name;

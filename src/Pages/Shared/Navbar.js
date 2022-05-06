@@ -2,7 +2,8 @@ import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
-import auth from '../../Firebase/Firebase.init';
+import auth from "../../Firebase.init";
+import logo from '../../Assets/logo.png'
 
 const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -11,9 +12,9 @@ const Navbar = () => {
 
         <nav className="bg-white shadow-lg border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
             <div className="container flex flex-wrap justify-between items-center mx-auto">
-                <Link to="https://flowbite.com" className="flex items-center">
-                    <img src="/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                    <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                <Link to="/" className="flex items-center">
+                    <img src={logo} className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                    <span className="self-center text-xl font-semibold whitespace-nowrap text-gray-700">Cars Inventory</span>
                 </Link>
                 <button onClick={() => setHamburger(!hamburger)} data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="mobile-menu" aria-expanded="false">
                     <span className="sr-only">Open main menu</span>
@@ -23,16 +24,61 @@ const Navbar = () => {
                 <div className={`${hamburger ? 'block' : 'hidden'} w-full md:block md:w-auto`} id="mobile-menu">
                     <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         <li>
-                            <Link to="/" className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 " aria-current="page">Home</Link>
+                            <NavLink
+                                to="/"
+                                className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                            >
+                                Home
+                            </NavLink>
+                        </li>
+
+
+                        {
+                            user
+                            &&
+                            <>
+                                <li>
+                                    <NavLink
+                                        to="/manageinventory"
+                                        className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                                    >
+                                        Manage Items
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/additems"
+                                        className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                                    >
+                                        Add Items
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/myitems"
+                                        className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                                    >
+                                        My Items
+                                    </NavLink>
+                                </li>
+                            </>
+
+                        }
+                        <li>
+                            <NavLink
+                                to="/blog"
+                                className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                            >
+                                Blog
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to="/" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">About</Link>
-                        </li>
-                        <li>
-                            <Link to="/" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Services</Link>
-                        </li>
-                        <li>
-                            <Link to="/" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Pricing</Link>
+                            <NavLink
+                                to="/contact"
+                                className={({ isActive }) => isActive ? "text-blue-600 block py-2 pr-4 pl-3 md:p-0" : "block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "}
+                            >
+                                Contacts
+                            </NavLink>
                         </li>
                         <li>
                             {

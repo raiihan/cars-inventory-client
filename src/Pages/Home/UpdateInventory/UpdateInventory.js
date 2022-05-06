@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import auth from '../../../Firebase/Firebase.init';
+import auth from '../../../Firebase.init';
 
 const UpdateInventory = () => {
     const { inventoryId } = useParams();
@@ -12,7 +12,7 @@ const UpdateInventory = () => {
     const [product, setProduct] = useState({});
     const { _id, name, img, price, quantity, supplier, description } = product;
     useEffect(() => {
-        const url = `http://localhost:5000/product/${inventoryId}`;
+        const url = `https://hidden-retreat-56283.herokuapp.com/product/${inventoryId}`;
         const getProduct = async () => {
             const { data } = await axios.get(url);
             setProduct(data);
@@ -20,7 +20,7 @@ const UpdateInventory = () => {
         getProduct();
     }, [inventoryId, product]);
     const handleDelivary = async id => {
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://hidden-retreat-56283.herokuapp.com/product/${id}`
         const updateQuantiy = quantity - 1;
         const body = {
             name,
@@ -49,7 +49,7 @@ const UpdateInventory = () => {
             quantity: newQuantity,
             supplier
         }
-        const url = `http://localhost:5000/product/${inventoryId}`;
+        const url = `https://hidden-retreat-56283.herokuapp.com/product/${inventoryId}`;
         const { data } = await axios.put(url, body)
         if (data.modifiedCount === 1) {
             toast('New quantity added successfully');
@@ -93,7 +93,7 @@ const UpdateInventory = () => {
                             <button
                                 onClick={() => handleDelivary(_id)}
                                 type="button"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center w-full ">Delibaret</button>
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-3.5 text-center w-full ">Deliverd</button>
                         </div>
                     </div>
                 </div>

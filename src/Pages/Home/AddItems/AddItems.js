@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import auth from '../../../Firebase/Firebase.init';
+import auth from '../../../Firebase.init';
 import { toast } from 'react-toastify';
 
 const AddItems = () => {
@@ -18,7 +18,7 @@ const AddItems = () => {
             quantity: userInput.quantity,
             supplier: userInput.supplier,
         }
-        const { data } = await axios.post('http://localhost:5000/product', body)
+        const { data } = await axios.post('https://hidden-retreat-56283.herokuapp.com/product', body)
         if (data.insertedId) {
             toast('Your post added Successfully')
             reset()

@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { FcGoogle } from 'react-icons/fc';
 import { useLocation, useNavigate } from 'react-router-dom';
-import auth from '../../Firebase/Firebase.init';
+import auth from "../../Firebase.init";
+import Loading from '../Shared/Loading';
 
 const SocialLogin = () => {
     const navigate = useNavigate();
@@ -11,11 +13,17 @@ const SocialLogin = () => {
     const from = location.state?.from?.pathname || "/";
     useEffect(() => {
         if (user) {
-            navigate(from, { replace: true });
+            const email = user?.user?.email
+            const genetateToken = async () => {
+                const { data } = await axios.post('https://hidden-retreat-56283.herokuapp.com/createJWT', { email })
+                localStorage.setItem('accessToken', data.accessToken)
+                navigate(from, { replace: true });
+            }
+            genetateToken();
         }
     }, [user])
     if (loading) {
-        return <p>Loding...</p>
+        return <Loading />
     }
     return (
         <div className='w-full mx-auto mb-6'>
