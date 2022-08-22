@@ -13,6 +13,7 @@ const SupplierCollection = () => {
     const handleSearchSupplierProduct = e => {
         e.preventDefault();
         const supplier = e.target.supplier.value;
+        console.log(supplier);
         const url = `https://hidden-retreat-56283.herokuapp.com/productBySupplier?supplier=${supplier}`
         fetch(url)
             .then(res => res.json())

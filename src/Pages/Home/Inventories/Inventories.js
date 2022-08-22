@@ -13,7 +13,7 @@ const Inventories = () => {
             {
                 loading
                     ?
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10 md:ml-20">
                         {products.slice(0, 6).map(product => <Inventory
                             key={product._id}
                             product={product}

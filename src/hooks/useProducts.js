@@ -10,7 +10,7 @@ const useProducts = () => {
                 setProducts(data)
                 setLoading(true)
             })
-    }, [products]);
+    }, []);
     return [products, loading]
 }
 
