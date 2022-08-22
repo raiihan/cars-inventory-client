@@ -13,7 +13,6 @@ const SupplierCollection = () => {
     const handleSearchSupplierProduct = e => {
         e.preventDefault();
         const supplier = e.target.supplier.value;
-        console.log(supplier);
         const url = `https://hidden-retreat-56283.herokuapp.com/productBySupplier?supplier=${supplier}`
         fetch(url)
             .then(res => res.json())
@@ -49,18 +48,22 @@ const SupplierCollection = () => {
 
                 {
 
-                    products.map(product => <SwiperSlide>
+                    products.length < 1
+                        ?
+                        <p className='text-2xl text-red-600 font-bold text-center'>Please input a valid supplier name and then hit the search button</p>
+                        :
+                        products.map(product => <SwiperSlide>
 
-                        <div className='relative parent'>
-                            <img className='w-full mb-4' src={product.img} alt="" />
-                            <div className="absolute w-full top-0 left-0 h-full backdrop-blur-sm flex justify-center items-center opacity-0 hover:opacity-100 duration-600">
-                                <button
-                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                                ><Link to={`/inventory/${product._id}`}>See Details</Link></button>
+                            <div className='relative parent'>
+                                <img className='w-full mb-4' src={product.img} alt="" />
+                                <div className="absolute w-full top-0 left-0 h-full backdrop-blur-sm flex justify-center items-center opacity-0 hover:opacity-100 duration-600">
+                                    <button
+                                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                                    ><Link to={`/inventory/${product._id}`}>See Details</Link></button>
+                                </div>
                             </div>
-                        </div>
 
-                    </SwiperSlide>)
+                        </SwiperSlide>)
 
                 }
             </Swiper>
