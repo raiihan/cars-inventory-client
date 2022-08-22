@@ -31,38 +31,28 @@ const Count = ({ end }) => {
 const TotalCounter = () => {
     return (
         <div>
-            <div className='grid grid-cols-1 sm:grid-cols-3 my-12'>
-                <div className='mt-8 sm:mt-24 text-center flex justify-center'>
-                    <div>
-                        <div
-                            className='h-36'>
-                            <h2
-                                className='text-4xl'>
-                                <Count end={1123456} />
-                            </h2>
 
-                            <p>Car for sale</p>
-                        </div>
-                        <div className='h-36'>
-                            <h2 className='text-4xl'> <Count end={2956} /></h2>
-                            <p>visitor per day</p>
-                        </div>
-                    </div>
+            <div className='flex flex-col sm:flex-row items-center my-12 justify-around'>
+                <div
+                    className='h-36'>
+                    <h2
+                        className='text-4xl'>
+                        <Count end={1123456} />
+                    </h2>
+
+                    <p>Car for sale</p>
                 </div>
-                <div className='hidden sm:block'>
-                    <img src={img} alt="" />
+                <div className='h-36'>
+                    <h2 className='text-4xl'> <Count end={2956} /></h2>
+                    <p>visitor per day</p>
                 </div>
-                <div className='mt-8 sm:mt-24 text-center flex justify-center'>
-                    <div>
-                        <div className='h-36'>
-                            <h2 className='text-4xl'><Count end={5123} /></h2>
-                            <p>Supplier Review</p>
-                        </div>
-                        <div className='h-36'>
-                            <h2 className='text-4xl'><Count end={1199} /></h2>
-                            <p>Verified Supplier</p>
-                        </div>
-                    </div>
+                <div className='h-36'>
+                    <h2 className='text-4xl'><Count end={5123} /></h2>
+                    <p>Supplier Review</p>
+                </div>
+                <div className='h-36'>
+                    <h2 className='text-4xl'><Count end={1199} /></h2>
+                    <p>Verified Supplier</p>
                 </div>
             </div>
         </div>
