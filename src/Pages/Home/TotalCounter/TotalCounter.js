@@ -34,7 +34,7 @@ const TotalCounter = () => {
 
             <div className='flex flex-col sm:flex-row items-center my-12 justify-around'>
                 <div
-                    className='h-36'>
+                    className='h-20 flex flex-col items-center justify-center'>
                     <h2
                         className='text-4xl'>
                         <Count end={1123456} />
@@ -42,15 +42,15 @@ const TotalCounter = () => {
 
                     <p>Car for sale</p>
                 </div>
-                <div className='h-36'>
+                <div className='h-20 flex flex-col items-center justify-center'>
                     <h2 className='text-4xl'> <Count end={2956} /></h2>
                     <p>visitor per day</p>
                 </div>
-                <div className='h-36'>
+                <div className='h-20 flex flex-col items-center justify-center'>
                     <h2 className='text-4xl'><Count end={5123} /></h2>
                     <p>Supplier Review</p>
                 </div>
-                <div className='h-36'>
+                <div className='h-20 flex flex-col items-center justify-center'>
                     <h2 className='text-4xl'><Count end={1199} /></h2>
                     <p>Verified Supplier</p>
                 </div>

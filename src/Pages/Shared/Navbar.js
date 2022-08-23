@@ -4,14 +4,18 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
 import auth from "../../Firebase.init";
 import logo from '../../Assets/logo.png'
+import Loading from './Loading';
 
 const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
     const [hamburger, setHamburger] = useState(false);
+    if (loading) {
+        return <Loading></Loading>
+    }
     return (
 
         <nav className="bg-white shadow-lg border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
-            <div className="container flex flex-wrap justify-between items-center mx-auto">
+            <div className="container flex flex-wrap justify-between items-center mx-auto md:px-16">
                 <Link to="/" className="flex items-center">
                     <img src={logo} className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
                     <span className="self-center text-xl font-semibold whitespace-nowrap text-gray-700">Cars Inventory</span>

@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 const SupplierCollection = () => {
     const [products, setProducts] = useState([]);
+    const [error, setError] = useState("");
     const handleSearchSupplierProduct = e => {
         e.preventDefault();
         const supplier = e.target.supplier.value;
@@ -17,8 +18,13 @@ const SupplierCollection = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-
-                setProducts(data)
+                if (data.length < 1) {
+                    setError("Please input a valid supplier name and then hit the search button")
+                }
+                else {
+                    setProducts(data)
+                    setError('')
+                }
             })
     }
     return (
@@ -48,9 +54,9 @@ const SupplierCollection = () => {
 
                 {
 
-                    products.length < 1
+                    error
                         ?
-                        <p className='text-2xl text-red-600 font-bold text-center'>Please input a valid supplier name and then hit the search button</p>
+                        <p className='text-2xl text-red-600 font-bold text-center'>{error}</p>
                         :
                         products.map(product => <SwiperSlide>
 
