@@ -14,7 +14,7 @@ const ManageInventory = () => {
     const [currentPage, setCurrentPage] = useState(0);
     useEffect(() => {
         const getProductQuantity = async () => {
-            const { data } = await axios.get('https://hidden-retreat-56283.herokuapp.com/productCount')
+            const { data } = await axios.get('https://car-inventory.onrender.com/productCount')
             const count = data.count
             const page = Math.ceil(count / 5)
             setPages(page)
@@ -23,7 +23,7 @@ const ManageInventory = () => {
     }, [])
     useEffect(() => {
         const getProduct = async () => {
-            const url = `https://hidden-retreat-56283.herokuapp.com/products?currentPage=${currentPage}`;
+            const url = `https://car-inventory.onrender.com/products?currentPage=${currentPage}`;
             const { data } = await axios.get(url);
             setProducts(data)
             setLoading(true)
@@ -34,7 +34,7 @@ const ManageInventory = () => {
     const handleDeleteItem = async id => {
         const proceed = window.confirm("Are You Sure Want To Delete?");
         if (proceed) {
-            const { data } = await axios.delete(`https://hidden-retreat-56283.herokuapp.com/product/${id}`)
+            const { data } = await axios.delete(`https://car-inventory.onrender.com/product/${id}`)
             if (data.deletedCount === 1) {
                 toast("Deleted Successfully");
             }

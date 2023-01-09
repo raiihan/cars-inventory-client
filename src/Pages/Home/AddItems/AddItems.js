@@ -18,7 +18,7 @@ const AddItems = () => {
             quantity: userInput.quantity,
             supplier: userInput.supplier,
         }
-        const { data } = await axios.post('https://hidden-retreat-56283.herokuapp.com/product', body)
+        const { data } = await axios.post('https://car-inventory.onrender.com/product', body)
         if (data.insertedId) {
             toast('Your post added Successfully')
             reset()

@@ -26,20 +26,20 @@ const Banner = () => {
                 slidesPerView={1}
             >
                 <SwiperSlide >
-                    <img src={slide1} alt="" />
+                    <img src={slide1} alt="" className='w-full'/>
                 </SwiperSlide>
                 <SwiperSlide >
                     <div className='relative'>
-                        <img src={slide2} alt="" />
-                        <div className='absolute hidden sm:block top-[390px] left-[850px]  text-4xl uppercase text-gray-600 font-medium'><p>2016 new</p>
+                        <img src={slide2} alt=""className='w-full' />
+                        <div className='absolute hidden sm:block top-[560px] right-[120px]  text-4xl uppercase text-gray-600 font-medium'><p>2016 new</p>
                             <p>Mercedes-benz c-class</p>
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide >
                     <div className='relative'>
-                        <img src={slide3} alt="" />
-                        <div className='absolute hidden sm:block top-32 left-[450px]  text-4xl uppercase text-white font-medium'>
+                        <img src={slide3} alt="" className='w-full'/>
+                        <div className='absolute hidden sm:block top-32 left-[650px]  text-4xl uppercase text-white font-medium'>
                             <p>Mercedes-benz amg gt 2017</p>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ const UpdateInventory = () => {
     const [product, setProduct] = useState({});
     const { _id, name, img, price, quantity, supplier, description } = product;
     useEffect(() => {
-        const url = `https://hidden-retreat-56283.herokuapp.com/product/${inventoryId}`;
+        const url = `https://car-inventory.onrender.com/product/${inventoryId}`;
         const getProduct = async () => {
             const { data } = await axios.get(url);
             setProduct(data);
@@ -20,7 +20,7 @@ const UpdateInventory = () => {
         getProduct();
     }, [inventoryId, product]);
     const handleDelivary = async id => {
-        const url = `https://hidden-retreat-56283.herokuapp.com/product/${id}`
+        const url = `https://car-inventory.onrender.com/product/${id}`
         const updateQuantiy = quantity - 1;
         const body = {
             name,
@@ -49,7 +49,7 @@ const UpdateInventory = () => {
             quantity: newQuantity,
             supplier
         }
-        const url = `https://hidden-retreat-56283.herokuapp.com/product/${inventoryId}`;
+        const url = `https://car-inventory.onrender.com/product/${inventoryId}`;
         const { data } = await axios.put(url, body)
         if (data.modifiedCount === 1) {
             toast('New quantity added successfully');

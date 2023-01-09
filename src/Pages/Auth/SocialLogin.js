@@ -15,7 +15,7 @@ const SocialLogin = () => {
         if (user) {
             const email = user?.user?.email
             const genetateToken = async () => {
-                const { data } = await axios.post('https://hidden-retreat-56283.herokuapp.com/createJWT', { email })
+                const { data } = await axios.post('https://car-inventory.onrender.com/createJWT', { email })
                 localStorage.setItem('accessToken', data.accessToken)
                 navigate(from, { replace: true });
             }

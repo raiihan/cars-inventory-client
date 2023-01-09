@@ -15,7 +15,7 @@ const MyItems = () => {
     useEffect(() => {
         const getOrder = async () => {
             const email = user?.email;
-            const url = `https://hidden-retreat-56283.herokuapp.com/myorder?email=${email}`;
+            const url = `https://car-inventory.onrender.com/myorder?email=${email}`;
             try {
                 const { data } = await axios.get(url, {
                     headers: {
@@ -35,7 +35,7 @@ const MyItems = () => {
     const handleDeleteItem = async id => {
         const proceed = window.confirm("Are You Sure Want To Delete?");
         if (proceed) {
-            const { data } = await axios.delete(`https://hidden-retreat-56283.herokuapp.com/product/${id}`)
+            const { data } = await axios.delete(`https://car-inventory.onrender.com/product/${id}`)
             if (data.deletedCount === 1) {
                 toast("Deleted Successfully");
             }

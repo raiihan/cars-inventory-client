@@ -14,7 +14,7 @@ const SupplierCollection = () => {
     const handleSearchSupplierProduct = e => {
         e.preventDefault();
         const supplier = e.target.supplier.value;
-        const url = `https://hidden-retreat-56283.herokuapp.com/productBySupplier?supplier=${supplier}`
+        const url = `https://car-inventory.onrender.com/productBySupplier?supplier=${supplier}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
